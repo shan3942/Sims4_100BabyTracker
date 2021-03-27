@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "Summary";
+    string percent = $"{ViewBag.Babies}%";
+}
+
+<div id="Progress">
+    <h2>Progress</h2>
+    <hr />
+    <div class="progress" style="height: 30px;">
+        <div class="progress-bar" role="progressbar" style="width: @percent;" aria-valuenow="@ViewBag.Babies" aria-valuemin="0" aria-valuemax="100">@ViewBag.Babies of 100 Babies</div>
+    </div>
+</div>
+
+<div id="AllMatriarchs">
+    <h2>Overall</h2>
+    <hr />
+    <div class="row d-flex justify-content-around">
+        <div class="col-2 mb-3 text-center">
+            <div class="card-header bg-white">
+                Matriarchs
+            </div>
+            <div class="card-body">
+                <span>@ViewBag.Mommies</span>
+            </div>
+        </div>
+
+        <div class="col-2 mb-3 text-center">
+            <div class="card-header bg-white">
+                Baby Daddies
+            </div>
+            <div class="card-body">
+                <span>@ViewBag.AllDaddies</span>
+            </div>
+        </div>
+
+        <div class="col-2 mb-3 text-center">
+            <div class="card-header bg-white">
+                Babies
+            </div>
+            <div class="card-body">
+                <span>@ViewBag.Babies</span>
+            </div>
+        </div>
+
+        <div class="col-2  mb-3 text-center">
+            <div class="card-header bg-white">
+                Bladder Failures
+            </div>
+            <div class="card-body">
+                <span>@ViewBag.Bladder</span>
+            </div>
+        </div>
+
+        <div class="col-2  mb-3 text-center">
+            <div class="card-header bg-white">
+                Energy Failures
+            </div>
+            <div class="card-body">
+                <span>@ViewBag.Energy</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="CurrentMatriarch">
+    <h2>Current Matriarch - <span class="name">@ViewBag.CurrentMom.Name</span></h2>
+    <hr />
+    <div class="row d-flex justify-content-between">
+        <div class="col-2 mb-3 text-center">
+            <div class="card-header bg-white">
+                Baby Daddies
+            </div>
+            <div class="card-body">
+                <span>@ViewBag.CurrentDaddies</span>
+            </div>
+        </div>
+
+        <div class="col-2 mb-3 text-center">
+            <div class="card-header bg-white">
+                Babies @Html.ActionLink("Add","Create","Children", null, new { @class = "addChild" })
+            </div>
+            <div class="card-body">
+                <span>@ViewBag.CurrentMom.Children.Count</span>
+            </div>
+        </div>
+
+        <div class="col-2  mb-3 text-center">
+            <div class="card-header bg-white">
+                Bladder Failures
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("AddBladderFailure", "Matriarchs", FormMethod.Post))
+                {
+                    <input type="submit" class="btn" value="@ViewBag.CurrentMom.BladderFailures" />
+                }
+            </div>
+        </div>
+
+        <div class="col-2  mb-3 text-center">
+            <div class="card-header bg-white">
+                Energy Failures
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("AddEnergyFailure", "Matriarchs", FormMethod.Post))
+                {
+                    <input type="submit" class="btn" value="@ViewBag.CurrentMom.EnergyFailures" />
+                }
+            </div>
+        </div>
+    </div>
+</div>

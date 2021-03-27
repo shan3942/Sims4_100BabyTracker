@@ -1,0 +1,65 @@
+﻿@model PagedList.IPagedList<Sims4_100BabyTracker.Models.Child>
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Children";
+}
+
+<div class="d-flex justify-content-between">
+    <h2>@ViewBag.Title</h2>
+    <p>
+        @Html.ActionLink("Add New Child", "Create")
+    </p>
+</div>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            #
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Mother
+        </th>
+        <th>
+            Father
+        </th>
+        <th>
+            Generation
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChildId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mother.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Father)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mother.MatriarchId)
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new
+{
+    page
+}),
+new PagedListRenderOptions()
+{
+    Display = PagedListDisplayMode.IfNeeded,
+    DisplayPageCountAndCurrentLocation = true
+})

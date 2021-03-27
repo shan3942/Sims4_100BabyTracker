@@ -1,0 +1,107 @@
+﻿@model Sims4_100BabyTracker.ViewModels.MatriarchDetailsVM
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Matriarch Details";
+    int daddyCount = ViewBag.DaddyCount;
+    int childCount = ViewBag.ChildCount;
+}
+
+<div class="d-flex justify-content-between mb-3">
+    <h2>Generation @Html.DisplayFor(model => model.Mother.MatriarchId) Matriarch - <span class="name">@Html.DisplayFor(model => model.Mother.Name)</span></h2>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<hr />
+
+<div class="row d-flex justify-content-between">
+    <div class="col-2 mb-3 text-center">
+        <div class="card-header bg-white">
+            Baby Daddies
+        </div>
+        <div class="card-body">
+            <span>@daddyCount</span>
+        </div>
+    </div>
+
+    <div class="col-2 mb-3 text-center">
+        <div class="card-header bg-white">
+            Babies @Html.ActionLink("Add", "Create", "Children", null, new { @class = "addChild" })
+        </div>
+        <div class="card-body">
+            <span>@childCount</span>
+        </div>
+    </div>
+
+    <div class="col-2  mb-3 text-center">
+        <div class="card-header bg-white">
+            Bladder Failures
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("AddBladderFailure", "Matriarchs", FormMethod.Post))
+            {
+                <input type="submit" class="btn" value="@Html.DisplayFor(model => model.Mother.BladderFailures)" />
+            }
+        </div>
+    </div>
+
+    <div class="col-2  mb-3 text-center">
+        <div class="card-header bg-white">
+            Energy Failures
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("AddEnergyFailure", "Matriarchs", FormMethod.Post))
+            {
+                <input type="submit" class="btn" value="@Html.DisplayFor(model => model.Mother.EnergyFailures)" />
+            }
+        </div>
+    </div>
+</div>
+
+<table class="table table-striped mt-3">
+    <tr>
+        <th colspan="2">Baby Daddies - @daddyCount</th>
+    </tr>
+    <tr>
+        <th>Name</th>
+    </tr>
+    @foreach (string daddy in Model.DaddiesList)
+    {
+        <tr>
+            <td>@daddy</td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager(Model.DaddiesList, daddiesPage => Url.Action("Details", new
+{
+    daddiesPage
+}), new PagedListRenderOptions()
+{
+    Display = PagedListDisplayMode.IfNeeded,
+    DisplayPageCountAndCurrentLocation = true
+})
+
+<table class="table table-striped mt-3">
+    <tr>
+        <th colspan="2">Children - @childCount</th>
+    </tr>
+    <tr>
+        <th>Name</th>
+        <th>Father</th>
+    </tr>
+    @foreach (var child in Model.ChildrenList)
+    {
+        <tr>
+            <td>@child.Name</td>
+            <td>@child.Father</td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager(Model.ChildrenList, childrenPage => Url.Action("Details", new
+{
+    childrenPage
+}), new PagedListRenderOptions()
+{
+    Display = PagedListDisplayMode.IfNeeded,
+    DisplayPageCountAndCurrentLocation = true
+})

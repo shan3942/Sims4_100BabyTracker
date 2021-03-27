@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Sims4_100BabyTracker.Models.Matriarch>
+
+@{
+    ViewBag.Title = "Matriarchs";
+}
+
+<div class="d-flex justify-content-between">
+    <h2>@ViewBag.Title</h2>
+    <p>
+        @Html.ActionLink("Add Next Matriarch", "Create")
+    </p>
+</div>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            Generation
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            Baby Count
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BladderFailures)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnergyFailures)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatriarchId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Children.Count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BladderFailures)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnergyFailures)
+            </td>
+            <td>
+                @Html.ActionLink("View", "Details", new { id = item.MatriarchId })
+            </td>
+        </tr>
+    }
+
+</table>

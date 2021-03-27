@@ -1,0 +1,80 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap');
+
+/* GENERAL STYLES */
+* {
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+main {
+    padding-bottom: 77.8px;
+}
+
+a, a.nav-link, .addChild, .btn-link {
+    color: rgb(51,214,88)
+}
+
+    a:hover, a.nav-link:hover, .addChild:hover, .btn-link:hover {
+        color: rgb(51,214,88);
+    }
+
+    .btn-link:hover {
+        text-decoration: none;
+    }
+
+button:active {
+    outline: none;
+    border: none;
+}
+
+button:focus {
+    outline: 0;
+}
+
+.table {
+    text-align: center;
+    vertical-align: middle;
+}
+
+th {
+    font-weight: 600;
+}
+
+.create {
+    color: #33D658;
+    border-color: #33D658;
+}
+
+    .create:hover {
+        color: white;
+        background-color: #33D658;
+    }
+
+hr {
+    border-color: rgb(51,214,88);
+}
+
+/* HOME/SUMMARY STYLES */
+.progress-bar {
+    background-color: #33D658;
+}
+
+.card-body > span, .card-body > form > input {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+#CurrentMatriarch, #AllMatriarchs {
+    margin-top: 3rem;
+}
+
+.name {
+    font-size: 2rem;
+    font-style: italic;
+}
+
+.addChild {
+    font-size: .75rem;
+    font-style: italic;
+}

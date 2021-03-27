@@ -1,0 +1,55 @@
+﻿@model Sims4_100BabyTracker.Models.Child
+
+@{
+    ViewBag.Title = "Add New Child";
+}
+
+<div class="d-flex justify-content-between mb-3">
+    <h2>@ViewBag.Title</h2>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-2" })
+        <div class="col-6">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="MotherId" class = "control-label col-2">Mother</label>
+        <div class="col-6">
+            @Html.DropDownList("MotherId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MotherId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Father, htmlAttributes: new { @class = "control-label col-2" })
+        <div class="col-6">
+            @Html.EditorFor(model => model.Father, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Father, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-2">
+            <input type="submit" value="Add New Child" class="btn create" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
